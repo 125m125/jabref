@@ -893,7 +893,8 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             }
 
             String sb = String.join(",", keys);
-            StringSelection ss = new StringSelection("\\cite{" + sb + '}');
+            StringSelection ss = new StringSelection(
+                    JabRefPreferences.getInstance().get(JabRefPreferences.CITE_COMMAND) + "{" + sb + '}');
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, BasePanel.this);
 
             if (keys.size() == bes.size()) {

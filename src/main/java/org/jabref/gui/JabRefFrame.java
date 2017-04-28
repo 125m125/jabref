@@ -292,7 +292,7 @@ public class JabRefFrame extends JFrame implements OutputPrinter {
     private final AbstractAction copyKey = new GeneralAction(Actions.COPY_KEY, Localization.menuTitle("Copy BibTeX key"),
             Globals.getKeyPrefs().getKey(KeyBinding.COPY_BIBTEX_KEY));
     private final AbstractAction copyCiteKey = new GeneralAction(Actions.COPY_CITE_KEY, Localization.menuTitle(
-            "Copy \\cite{BibTeX key}"),
+            "Copy cite command"),
             Globals.getKeyPrefs().getKey(KeyBinding.COPY_CITE_BIBTEX_KEY));
     private final AbstractAction copyKeyAndTitle = new GeneralAction(Actions.COPY_KEY_AND_TITLE,
             Localization.menuTitle("Copy BibTeX key and title"),
