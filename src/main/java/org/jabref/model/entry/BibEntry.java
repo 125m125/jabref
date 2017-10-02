@@ -127,7 +127,7 @@ public class BibEntry implements Cloneable {
      * @param field    The field to return the value of.
      * @param database maybenull
      *                 The database of the bibtex entry.
-     * @return The resolved field value or null if not found.
+     * @return The resolved field value or empty if not found.
      */
     public Optional<String> getResolvedFieldOrAlias(String field, BibDatabase database) {
         Objects.requireNonNull(this, "entry cannot be null");
@@ -151,9 +151,12 @@ public class BibEntry implements Cloneable {
         // field in the referred entry: Do not do this for the bibtex key.
         if (!result.isPresent() && (database != null)) {
             Optional<BibEntry> referred = database.getReferencedEntry(this);
-            result = referred.flatMap(entry -> entry.getFieldOrAlias(field));
+            result = referred.flatMap(entry -> entry.getResolvedFieldOrAlias(field, database));
         }
-        return result.map(resultText -> BibDatabase.getText(resultText, database));
+        if (database != null) {
+            return result.map(database::resolveForStrings);
+        }
+        return result;
     }
 
     /**
